@@ -75,9 +75,24 @@ class VideoFilters extends AudioFilters
      *
      * @return VideoFilters
      */
-    public function clip($start, $duration = null)
+    public function clip($start, $duration)
     {
         $this->media->addFilter(new ClipFilter($start, $duration));
+
+        return $this;
+    }
+
+    /**
+     * Inserts a watermark.
+     *
+     * @param TimeCode $start
+     * @param TimeCode $duration
+     *
+     * @return VideoFilters
+     */
+    public function watermark($watermarkImage, $position = null, $size = null)
+    {
+        $this->media->addFilter(new WatermarkFilter($watermarkImage, $position, $size));
 
         return $this;
     }
